@@ -1,0 +1,17 @@
+G:\Epam_training\Exit_task\Periodical\DAL.Tests\bin\Debug\DAL.Tests.dll
+G:\Epam_training\Exit_task\Periodical\DAL.Tests\bin\Debug\DAL.Tests.pdb
+G:\Epam_training\Exit_task\Periodical\DAL.Tests\bin\Debug\BLL.dll
+G:\Epam_training\Exit_task\Periodical\DAL.Tests\bin\Debug\DAL.dll
+G:\Epam_training\Exit_task\Periodical\DAL.Tests\bin\Debug\nunit.framework.dll
+G:\Epam_training\Exit_task\Periodical\DAL.Tests\bin\Debug\Ninject.dll
+G:\Epam_training\Exit_task\Periodical\DAL.Tests\bin\Debug\AutoMapper.dll
+G:\Epam_training\Exit_task\Periodical\DAL.Tests\bin\Debug\EntityFramework.dll
+G:\Epam_training\Exit_task\Periodical\DAL.Tests\bin\Debug\BLL.pdb
+G:\Epam_training\Exit_task\Periodical\DAL.Tests\bin\Debug\DAL.pdb
+G:\Epam_training\Exit_task\Periodical\DAL.Tests\bin\Debug\nunit.framework.xml
+G:\Epam_training\Exit_task\Periodical\DAL.Tests\bin\Debug\Ninject.xml
+G:\Epam_training\Exit_task\Periodical\DAL.Tests\bin\Debug\AutoMapper.xml
+G:\Epam_training\Exit_task\Periodical\DAL.Tests\bin\Debug\EntityFramework.xml
+G:\Epam_training\Exit_task\Periodical\DAL.Tests\obj\Debug\DAL.Tests.csprojResolveAssemblyReference.cache
+G:\Epam_training\Exit_task\Periodical\DAL.Tests\obj\Debug\DAL.Tests.dll
+G:\Epam_training\Exit_task\Periodical\DAL.Tests\obj\Debug\DAL.Tests.pdb

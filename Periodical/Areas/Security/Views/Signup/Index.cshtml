@@ -1,0 +1,48 @@
+﻿@model Periodical.Areas.Security.Models.SignupViewModel
+@{
+    ViewBag.Title = "Signup";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="jumbotron-indent"></div>
+<div class="jumbotron authorization-field">
+    <h3 class="text-center">@ViewBag.Title</h3>
+    <hr class="colorgraph">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        <div class="input-group">
+            <a class="input-group-addon"><span class="input-group glyphicon glyphicon-user"></span></a>
+            @Html.TextBoxFor(m => m.FirstName, new { @placeholder = "First name", autofocus = "", @class = "authorization-textbox" })
+            @Html.ValidationMessageFor(m => m.FirstName)
+        </div>
+        <div class="input-group">
+            <a class="input-group-addon"><span class="input-group glyphicon glyphicon-user"></span></a>
+            @Html.TextBoxFor(m => m.LastName, new { @placeholder = "Last name", autofocus = "", @class = "authorization-textbox" })
+            @Html.ValidationMessageFor(m => m.LastName)
+        </div>
+        <div class="input-group">
+            <a class="input-group-addon"><span class="input-group glyphicon glyphicon-envelope"></span></a>
+            @Html.TextBoxFor(m => m.Email, new { @placeholder = "example@email.com", autofocus = "", @class = "authorization-textbox" })
+            @Html.ValidationMessageFor(m => m.Email)
+        </div>
+        <div class="input-group">
+            <a class="input-group-addon"><span class="input-group glyphicon glyphicon-lock"></span></a>
+            @Html.PasswordFor(m => m.Password, new { @placeholder = "Password", @class = "authorization-textbox" })
+            @Html.ValidationMessageFor(m => m.Password)
+        </div>
+        <div class="input-group">
+            <a class="input-group-addon"><span class="input-group glyphicon glyphicon-lock"></span></a>
+            @Html.PasswordFor(m => m.ConfirmPassword, new { @placeholder = "Confirm password", @class = "authorization-textbox" })
+            @Html.ValidationMessageFor(m => m.ConfirmPassword)
+        </div>
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary btn-block">Submit</button>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

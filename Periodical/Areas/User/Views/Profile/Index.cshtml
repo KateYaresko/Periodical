@@ -1,0 +1,192 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="jumbotron-indent"></div>
+<div class="profile container">
+    <ul class="nav nav-tabs">
+        <li class="active">
+            <a href="#1tab" data-toggle="tab">Personal Data</a>
+        </li>
+        <li>
+            <a href="#2tab" data-toggle="tab">Subscribes</a>
+        </li>
+        <li>
+            <a href="#3tab" data-toggle="tab">User Management</a>
+        </li>
+        <li>
+            <a href="#4tab" data-toggle="tab">Edition management</a>
+        </li>
+    </ul>
+
+    <div class="tab-content clearfix">
+        <div class="tab-pane active personal-data" id="1tab">
+            <div class="jumbotron personal-data-jumbotron">
+                <h3 class="text-center">Edit your personal data</h3>
+                <hr class="colorgraph">
+                <table class="table" id="change-profile">
+                    <tbody>
+                        <tr>
+                            <td><strong>First name</strong></td>
+                            <td>
+                                <a href="#" id="firstname-change" data-type="text" data-pk="{{ user.uid }}" data-url="{{ url_for('profile') }}" data-title="Enter firstname">user.firstname</a>
+                                <i class="glyphicon glyphicon-pencil pencil-change"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Last name</strong></td>
+                            <td>
+                                <a href="#" id="lastname-change" data-type="text" data-pk="{{ user.uid }}" data-url="{{ url_for('profile') }}" data-title="Enter lastname">user.lastname</a>
+                                <i class="glyphicon glyphicon-pencil pencil-change"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Email</strong></td>
+                            <td>
+                                <a href="#" id="email-change" data-type="text" data-pk="{{ user.uid }}" data-url="{{ url_for('profile') }}" data-title="Enter email">user.email</a>
+                                <i class="glyphicon glyphicon-pencil pencil-change"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cash</strong></td>
+                            <td>
+                                100$
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="row text-center personal-data-row">
+                    <a href="#add-cash-modal" data-toggle="modal" class="btn btn-success personal-data-btn">
+                        <i class="glyphicon glyphicon-usd"></i>
+                        &nbsp;Add Cash
+                    </a>
+                </div>
+                <div class="row text-center personal-data-row">
+                    <a href="#change-password-modal" data-toggle="modal" class="btn btn-info personal-data-btn">
+                        <i class="glyphicon glyphicon-lock"></i>
+                        &nbsp;Change password
+                    </a>
+                </div>
+                <div class="row text-center personal-data-row">
+                    <a href="#delete-account-modal" data-toggle="modal" class="btn btn-danger personal-data-btn">
+                        <i class="glyphicon glyphicon-remove"></i>
+                        &nbsp;Delete account
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane personal-data" id="2tab">
+            @*<div class="col-md-10 col-sm-10">
+                <table id="editions-table" class="table table-projects row-border display table-striped">
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Edition</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Category</th>
+                            <th>Edition</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @foreach (var edition in Model.Item2)
+                        {
+                            <tr>
+                                <td>@Html.ActionLink(edition.Name, "Articles", "Editions", new { editionId = edition.EditionId, isSubscribed = edition.IsSubscribed }, null)</td>
+                                <td>@edition.Price $</td>
+                                @if (edition.IsSubscribed)
+                                {
+                                    <td>You are already subscribed</td>
+                                }
+                                else
+                                {
+                                    <td><a href="#">Click here to subscribe!</a></td>
+                                }
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>*@
+        </div>
+        <div class="tab-pane personal-data" id="3tab">
+            <h3>We applied clearfix to the tab-content to rid of the gap between the tab and the content</h3>
+        </div>
+        <div class="tab-pane personal-data" id="4tab">
+            <h3>We use css to change the background color of the content to be equal to the tab</h3>
+        </div>
+    </div>
+</div>
+<div id="add-cash-modal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title text-center">Add Cash</h4>
+            </div>
+            <form action="{{ url_for('profile') }}" method="post" id="add-cash-form">
+                <div class="modal-body">
+                    <div class="input-group change-psw-input">
+                        <a class="input-group-addon"><span class="input-group glyphicon glyphicon-usd" id="surname" aria-hidden="true"></span></a>
+                        <input name='number' type='number' value='10' min="1" class="add-cash-input"/><br />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary popup-btn" name="add-cash-form">Add</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div id="change-password-modal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title text-center">Change Password</h4>
+            </div>
+            <form action="{{ url_for('profile') }}" method="post" id="change-psw-form">
+                <div class="modal-body">
+                    <div class="input-group change-psw-input">
+                        <a class="input-group-addon"><span class="input-group glyphicon glyphicon-lock" aria-hidden="true"></span></a>
+                        <input type="password" class="form-control" placeholder="Current password" name="old_passw" autofocus="autofocus">
+                    </div>
+                    <div class="input-group change-psw-input">
+                        <a class="input-group-addon"><span class="input-group glyphicon glyphicon-lock" id="surname" aria-hidden="true"></span></a>
+                        <input type="password" class="form-control" placeholder="New password" name="new_passw">
+                    </div>
+                    <div class="input-group change-psw-input">
+                        <a class="input-group-addon"><span class="input-group glyphicon glyphicon-lock" id="email" aria-hidden="true"></span></a>
+                        <input type="password" class="form-control" placeholder="Confirm new password" name="retype_new_passw">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary popup-btn" name="change-passw-form">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="jumbotron-indent"></div>
+<div id="delete-account-modal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title text-center">Delete Account</h4>
+            </div>
+            <form action="{{ url_for('profile') }}" method="post">
+                <div class="modal-body">
+                    <p>Are you shure you want to delete account?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success popup-btn" name="delete-account-form">Yes</button>
+                    <button class="btn btn-danger popup-btn" data-dismiss="modal">No</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

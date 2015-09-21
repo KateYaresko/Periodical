@@ -1,0 +1,10 @@
+G:\Epam_training\Exit_task\Periodical\DAL\bin\Debug\DAL.dll.config
+G:\Epam_training\Exit_task\Periodical\DAL\bin\Debug\DAL.dll
+G:\Epam_training\Exit_task\Periodical\DAL\bin\Debug\DAL.pdb
+G:\Epam_training\Exit_task\Periodical\DAL\bin\Debug\EntityFramework.dll
+G:\Epam_training\Exit_task\Periodical\DAL\bin\Debug\EntityFramework.SqlServer.dll
+G:\Epam_training\Exit_task\Periodical\DAL\bin\Debug\EntityFramework.xml
+G:\Epam_training\Exit_task\Periodical\DAL\bin\Debug\EntityFramework.SqlServer.xml
+G:\Epam_training\Exit_task\Periodical\DAL\obj\Debug\DAL.dll
+G:\Epam_training\Exit_task\Periodical\DAL\obj\Debug\DAL.pdb
+G:\Epam_training\Exit_task\Periodical\DAL\obj\Debug\DAL.csprojResolveAssemblyReference.cache

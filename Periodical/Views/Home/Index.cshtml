@@ -1,0 +1,55 @@
+﻿@model List<Periodical.Models.CategoryViewModel>
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+@section featured {
+    <section class="featured">
+        <h1 class="motto1">Reading gives us some place to go...</h1><br />
+        <h1 class="motto2">...when we have to stay where we are</h1>
+        <div class="content-wrapper">
+            <hgroup class="title"></hgroup>
+        </div>
+        <div class="home-signup">
+            <h2 class="text-center">Don't have an account? <a href="/Account/Register"><strong class="strong-signup">SIGN UP FOR FREE</strong>!</a></h2>
+        </div>
+    </section>
+}
+<section class="content-wrapper main-content clear-fix">
+    <div class="row text-center home-about">
+        <div class="col-sm-4">
+            <h2>WHO WE ARE</h2>
+            <p>
+                It all started in the september of 2015 with a simple, bold idea: make a better news.
+                But, not just a better news – a better way of getting it. A new kind of news company that works hand in hand with world-known companies to bring in this world something meaningful.
+            </p>
+        </div>
+        <div class="col-sm-4">
+            <h2>WHAT WE DO</h2>
+            <p>
+                We’re a big company.  But we believe, above all, in one thing –  the news rule the world!  Yes, we have the scale and resources from whole of the world. But also the speed, creativity and agility of a fresh new start-up. We gather best interesting thing ever and give it to you!
+            </p>
+        </div>
+        <div class="col-sm-4">
+            <h2>WHY US</h2>
+            <p>
+                We are continually focused on finding ways to make you satasfied of our community and we participate in several activities throughout the year. Our attitude toward great service and helping others to find what they actually need inviting and fun.
+            </p>
+        </div>
+    </div>
+</section>
+<section class="home-imgs-with-title">
+    <div class="col-md-12 home-imgs text-center">
+        <h2 class="home-img-title">What are our articles about? About everything!</h2>
+        @foreach (var category in Model)
+        {
+            <div class="col-md-2 home-pages">
+                <a href='@Url.Action("Index", "Editions", new { categoryId = category.CategoryId })' class="thumbnail">
+                    <img src='/Content/@category.HomeImgName' alt="@category.Name">
+                </a>
+                <h3 class="img-subtitle">@category.Name</h3>
+            </div>
+        }  
+    </div>
+</section>

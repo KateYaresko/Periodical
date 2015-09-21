@@ -1,0 +1,64 @@
+﻿@model Tuple<List<Periodical.Models.CategoryViewModel>, List<Periodical.Models.EditionViewModel>>
+
+@{
+    ViewBag.Title = "Editions";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .categoty-img {
+        background-image: url(@ViewBag.ActiveBackground);
+    }
+</style>
+
+<div class="categoty-img" style="background-image: url('Content/@ViewBag.ActiveBackground')"></div>
+<div class="editions">
+    <div class="list-group col-md-2 col-sm-2">
+        @foreach (var category in Model.Item1)
+        {
+            string a_class = "list-group-item";
+            if (category.CategoryId == ViewBag.ActiveCategory)
+            {
+                a_class = "list-group-item active";
+            }
+            <a href='@Url.Action("Index", "Editions", new { categoryId = category.CategoryId })' class="@a_class">
+                <span class="glyphicon glyphicon-@category.IconName" aria-hidden="true"></span>
+                &nbsp;@category.Name
+            </a>
+        }
+    </div>
+    <div class="col-md-10 col-sm-10">
+        <table id="editions-table" class="table table-projects row-border display table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Subscription</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Subscription</th>
+                </tr>
+            </tfoot>
+            <tbody>
+                @foreach (var edition in Model.Item2)
+                {
+                    <tr>
+                        <td>@Html.ActionLink(edition.Name, "Articles", "Editions", new { editionId = edition.EditionId, isSubscribed = edition.IsSubscribed }, null)</td>
+                        <td>@edition.Price $</td>
+                        @if (edition.IsSubscribed)
+                        {
+                            <td>You are already subscribed</td>
+                        }
+                        else
+                        {
+                            <td><a href="#">Click here to subscribe!</a></td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
