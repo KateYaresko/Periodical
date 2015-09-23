@@ -23,7 +23,7 @@ namespace Periodical.Controllers
             var categories = Mapper.Map<IEnumerable<CategoryDTO>, List<CategoryViewModel>>(editionsService.GetCategories());
 
             Mapper.CreateMap<EditionDTO, EditionViewModel>();
-            var editions = Mapper.Map<IEnumerable<EditionDTO>, List<EditionViewModel>>(editionsService.GetEditionsByCategoryId(categoryId));
+            var editions = Mapper.Map<IEnumerable<EditionDTO>, List<EditionViewModel>>(editionsService.GetEditionsByCategoryId(categoryId, User.Identity.Name));
 
             var models = new Tuple<List<CategoryViewModel>, List<EditionViewModel>>(categories, editions);
 
@@ -48,10 +48,10 @@ namespace Periodical.Controllers
             return View(models);
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            editionsService.Dispose();
-            base.Dispose(disposing);
-        }
+        //protected override void Dispose(bool disposing)
+        //{
+        //    editionsService.Dispose();
+        //    base.Dispose(disposing);
+        //}
     }
 }

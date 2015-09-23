@@ -29,6 +29,16 @@ namespace BLL.Services
             Mapper.CreateMap<User, UserDTO>();
             return Mapper.Map<IEnumerable<User>, List<UserDTO>>(Db.Users.GetBy(user => user.Email == email));
         }
+
+        public void CreateUser(UserDTO user)
+        {
+            Mapper.CreateMap<UserDTO, User>();
+            User newUser = Mapper.Map<UserDTO, User>(user);
+            newUser.Cash = 0;
+            newUser.IsBlocked = false;
+            newUser.Role = new Role { Name = "User" };
+            Db.Users.Create(newUser);
+        }
         public void Dispose()
         {
             Db.Dispose();

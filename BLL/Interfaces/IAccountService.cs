@@ -10,6 +10,7 @@ namespace BLL.Interfaces
     public interface IAccountService
     {
         List<UserDTO> GetUserByEmail(string email);
+        void CreateUser(UserDTO user);
         void Dispose();
     }
 }

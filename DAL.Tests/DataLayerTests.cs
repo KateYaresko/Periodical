@@ -41,5 +41,19 @@ namespace DAL.Tests
         //    Assert.AreEqual(1, res);
 
         //}
+
+
+        [Test]
+        public void Can_Get_Cat()
+        {
+            EFUnitOfWork ef = new EFUnitOfWork();
+
+            var sample = new Category() { Name = "yura skaki" };
+
+            ef.Categories.Create(sample);
+
+            Assert.NotNull(ef.Categories.GetAll());
+
+        }
     }
 }

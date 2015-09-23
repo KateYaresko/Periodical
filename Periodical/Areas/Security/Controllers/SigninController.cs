@@ -13,7 +13,7 @@ namespace Periodical.Areas.Security.Controllers
 {
     public class SigninController : BaseSecurityController
     {
-        public SigninController(IPeriodicalMembershipProvider membership) : base(membership) { }
+        public SigninController(IPeriodicalMembershipProvider membership, IAccountService accountService) : base(membership, accountService) { }
 
         [HttpGet]
         [AllowAnonymous]

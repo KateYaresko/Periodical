@@ -18,14 +18,7 @@ namespace DAL.EntityFramework
             var roleUser = new Role { Name = "User" };
             var roles = new List<Role> { roleAdmin, roleEditor, roleUser };
             roles.ForEach(s => db.Roles.Add(s));
-            db.SaveChanges();
-
-            var userAdmin = new User { FirstName = "Kateryna", LastName = "Yaresko", Email="admin@gmail.com", Password="123456", Role = roleAdmin, Cash = 10000,  IsBlocked = false };
-            var userEditor = new User { FirstName = "Iurii", LastName = "Khmelenko", Email = "editor@gmail.com", Password = "123456", Cash = 5000, IsBlocked = false };
-            var userDefault = new User { FirstName = "Petr", LastName = "Vasichkin", Email = "user@gmail.com", Password = "123456", Cash = 1000, IsBlocked = false };
-            var users = new List<User> { userAdmin, userEditor, userDefault };
-            users.ForEach(s => db.Users.Add(s));
-            db.SaveChanges();
+            db.SaveChanges();           
 
             var NatureCategory = new Category { Name = "Nature", IconName = "leaf", BackgroundImgName = "nature-editions.jpg", HomeImgName = "monkey-home.jpg" };
             var FashionCategory = new Category { Name = "Fashion", IconName = "sunglasses", BackgroundImgName = "fashion-editions.jpg", HomeImgName = "fashion-home.jpg" };
@@ -300,6 +293,13 @@ namespace DAL.EntityFramework
                                                SunsetArticle, DangerArticle, SeaArticle, ClimateArticle, TheoryArticle,
                                                LaboratoryArticle, BatArticle, WindArticle, PlagueArticle, WhalesArticle};
             articles.ForEach(s => db.Articles.Add(s));
+            db.SaveChanges();
+
+            var userAdmin = new User { FirstName = "Kateryna", LastName = "Yaresko", Email = "admin@gmail.com", Password = "123456", Role = roleAdmin, Cash = 10000, IsBlocked = false, Editions = { NatureFauneEdition, FutureNatureEdition, NaturesDayEdition } };
+            var userEditor = new User { FirstName = "Iurii", LastName = "Khmelenko", Email = "editor@gmail.com", Password = "123456", Role = roleEditor, Cash = 5000, IsBlocked = false };
+            var userDefault = new User { FirstName = "Petr", LastName = "Vasichkin", Email = "user@gmail.com", Password = "123456", Role = roleUser, Cash = 1000, IsBlocked = false };
+            var users = new List<User> { userAdmin, userEditor, userDefault };
+            users.ForEach(s => db.Users.Add(s));
             db.SaveChanges();
         }
     }

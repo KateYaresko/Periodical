@@ -8,3 +8,13 @@ G:\Epam_training\Exit_task\Periodical\DAL\bin\Debug\EntityFramework.SqlServer.xm
 G:\Epam_training\Exit_task\Periodical\DAL\obj\Debug\DAL.dll
 G:\Epam_training\Exit_task\Periodical\DAL\obj\Debug\DAL.pdb
 G:\Epam_training\Exit_task\Periodical\DAL\obj\Debug\DAL.csprojResolveAssemblyReference.cache
+D:\Kate\Programming\Projects\Periodical\DAL\bin\Debug\DAL.dll.config
+D:\Kate\Programming\Projects\Periodical\DAL\bin\Debug\DAL.dll
+D:\Kate\Programming\Projects\Periodical\DAL\bin\Debug\DAL.pdb
+D:\Kate\Programming\Projects\Periodical\DAL\bin\Debug\EntityFramework.dll
+D:\Kate\Programming\Projects\Periodical\DAL\bin\Debug\EntityFramework.SqlServer.dll
+D:\Kate\Programming\Projects\Periodical\DAL\bin\Debug\EntityFramework.xml
+D:\Kate\Programming\Projects\Periodical\DAL\bin\Debug\EntityFramework.SqlServer.xml
+D:\Kate\Programming\Projects\Periodical\DAL\obj\Debug\DAL.csprojResolveAssemblyReference.cache
+D:\Kate\Programming\Projects\Periodical\DAL\obj\Debug\DAL.dll
+D:\Kate\Programming\Projects\Periodical\DAL\obj\Debug\DAL.pdb

@@ -5,12 +5,14 @@ using System.Web;
 using System.Web.Mvc;
 using Periodical.Areas.Security.Models;
 using BLL.Interfaces;
+using AutoMapper;
+using BLL.DTO;
 
 namespace Periodical.Areas.Security.Controllers
 {
     public class SignupController : BaseSecurityController
     {
-        public SignupController(IPeriodicalMembershipProvider membership) : base(membership) { }
+        public SignupController(IPeriodicalMembershipProvider membership, IAccountService accountService) : base(membership, accountService) { }
 
         [HttpGet]
         [AllowAnonymous]
@@ -25,21 +27,13 @@ namespace Periodical.Areas.Security.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Index(SignupViewModel model)
         {
-            //if (ModelState.IsValid)
-            //{
-            //    try
-            //    {
-            //        WebSecurity.CreateUserAndAccount(model.Email, model.Password,
-            //            new { FirstName = model.FirstName, LastName = model.LastName, Cash = 0, IsBlocked = false });
-            //        WebSecurity.Login(model.Email, model.Password);
-            //        return RedirectToAction("Index", "Home");
-            //    }
-            //    catch (MembershipCreateUserException e)
-            //    {
-            //        ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
-            //    }
-            //}
-            return View(model);
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            Mapper.CreateMap<SignupViewModel, UserDTO>();
+            accountService.CreateUser(Mapper.Map<SignupViewModel, UserDTO>(model));
+            return RedirectToAction("Index", "Signin", new { area = "Security" });
         }
 
     }

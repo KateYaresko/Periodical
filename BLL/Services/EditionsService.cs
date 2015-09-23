@@ -28,10 +28,20 @@ namespace BLL.Services
             return categories;
         }
 
-        public List<EditionDTO> GetEditionsByCategoryId(int categoryId)
+        public List<EditionDTO> GetEditionsByCategoryId(int categoryId, string email)
         {
+            var editionsEntity = Db.Editions.GetBy(edition => edition.Category.CategoryId == categoryId).ToList();
             Mapper.CreateMap<Edition, EditionDTO>();
-            return Mapper.Map<IEnumerable<Edition>, List<EditionDTO>>(Db.Editions.GetBy(edition => edition.Category.CategoryId == categoryId));
+            var editions = Mapper.Map<List<Edition>, List<EditionDTO>>(editionsEntity);
+            User user = Db.Users.GetBy(u => u.Email == email).FirstOrDefault();
+            for(int i = 0; i < editionsEntity.Count(); i++)
+            {
+                if (user.Editions.Contains(editionsEntity[i]))
+                {
+                    editions[i].IsSubscribed = true;
+                }
+            }
+            return editions;
         }
 
         public string GetBackgroundById(int id)

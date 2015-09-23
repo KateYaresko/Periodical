@@ -10,6 +10,12 @@ namespace Periodical
         {
             bundles.IgnoreList.Clear();
 
+            bundles.Add(new ScriptBundle("~/bundles/editablejs").Include(
+                        "~/Scripts/bootstrap-editable.min.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/editablecss").Include(
+                        "~/Content/bootstrap-editable.css"));
+
             bundles.Add(new ScriptBundle("~/bundles/datatablesjs").Include(
                         "~/Scripts/jquery.dataTables.min.js",
                         "~/Scripts/dataTables.bootstrap.min.js"));

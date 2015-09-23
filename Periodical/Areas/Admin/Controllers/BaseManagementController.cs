@@ -9,5 +9,11 @@ namespace Periodical.Areas.Admin.Controllers
 {
     public class BaseManagementController : Controller
     {
+        protected IAdminService adminService;
+
+        public BaseManagementController(IAdminService adminService)
+        {
+            this.adminService = adminService;
+        }
     }
 }

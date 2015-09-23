@@ -144,8 +144,8 @@ h5, h6 {
 .personal-data {
     padding-top: 3%;
     padding-bottom: 3%;
-    padding-left: 30%;
-    padding-right: 30%;
+    padding-left: 20%;
+    padding-right: 20%;
 }
 
 .personal-data-btn {
@@ -168,6 +168,14 @@ h5, h6 {
 
 .add-cash-input {
     width: 100%;
+}
+
+.profile-subscribes {
+    padding: 3%;
+}
+
+.profile-btn {
+    width: 50%;
 }
 
 /* main layout

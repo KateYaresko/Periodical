@@ -1,6 +1,78 @@
-﻿@{
+﻿@using Periodical.Areas.Admin.Models;
+@model Tuple<List<UserViewModel>>
+
+@{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<div class="jumbotron-indent"></div>
+<div class="profile container">
+    <ul class="nav nav-tabs">
+        <li class="active">
+            <a href="#1tab" data-toggle="tab">Personal Data</a>
+        </li>
+        <li>
+            <a href="#2tab" data-toggle="tab">Subscribes</a>
+        </li>
+    </ul>
+
+    <div class="tab-content clearfix">
+        <div class="tab-pane active profile-subscribes" id="1tab">
+            <table id="users-table" class="table table-projects row-border display table-striped">
+                <thead>
+                    <tr>
+                        <th>Full Name</th>
+                        <th>Email</th>
+                        <th>Block</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+
+                        <th>Full Name</th>
+                        <th>Email</th>
+                        <th>Block</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    @for (int i = 0; i < Model.Item1.Count(); i++)
+                    {
+                        <tr>
+                            <td>@Model.Item1[i].FirstName @Model.Item1[i].LastName</td>
+                            <td>@Model.Item1[i].Email</td>
+                            <td>
+                                @Html.CheckBoxFor(m => m.Item1[i].IsBlocked)
+                                Block
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="tab-pane profile-subscribes" id="2tab">
+            <table id="editions-table" class="table table-projects row-border display table-striped">
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Edition</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>Category</th>
+                        <th>Edition</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+
+                    <tr>
+                        <td>element.Item1</td>
+                        <td>element.Item2</td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

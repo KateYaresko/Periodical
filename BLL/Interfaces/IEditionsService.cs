@@ -10,7 +10,7 @@ namespace BLL.Interfaces
     public interface IEditionsService
     {
         List<CategoryDTO> GetCategories();
-        List<EditionDTO> GetEditionsByCategoryId(int categoryId);
+        List<EditionDTO> GetEditionsByCategoryId(int categoryId, string email);
         string GetBackgroundById(int id);
         void Dispose();
     }

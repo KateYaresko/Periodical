@@ -35,14 +35,22 @@ namespace DAL.Repositories
         public virtual void Create(TEntity entity)
         {
             Context.Set<TEntity>().Add(entity);
+            Save();
         }
         public virtual void Delete(TEntity entity)
         {
             Context.Set<TEntity>().Remove(entity);
+            Save();
         }
         public virtual void Update(TEntity entity)
         {
             Context.Entry(entity).State = EntityState.Modified;
+            Save();
+        }
+
+        private void Save()
+        {
+            Context.SaveChanges();
         }
 
         public virtual int Count()

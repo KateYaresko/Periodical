@@ -11,10 +11,12 @@ namespace Periodical.Areas.Security.Controllers
     public class BaseSecurityController : Controller
     {
         protected IPeriodicalMembershipProvider membership;
+        protected IAccountService accountService;
 
-        public BaseSecurityController(IPeriodicalMembershipProvider membership)
+        public BaseSecurityController(IPeriodicalMembershipProvider membership, IAccountService accountService)
         {
             this.membership = membership;
+            this.accountService = accountService;
         }       
         
         #region Helpers

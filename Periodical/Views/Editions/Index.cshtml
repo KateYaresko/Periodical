@@ -4,13 +4,13 @@
     ViewBag.Title = "Editions";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<style>
+@*<style>
     .categoty-img {
         background-image: url(@ViewBag.ActiveBackground);
     }
-</style>
+</style>*@
 
-<div class="categoty-img" style="background-image: url('Content/@ViewBag.ActiveBackground')"></div>
+<div class="categoty-img" @*style="background-image: url('Content/@ViewBag.ActiveBackground')"*@></div>
 <div class="editions">
     <div class="list-group col-md-2 col-sm-2">
         @foreach (var category in Model.Item1)

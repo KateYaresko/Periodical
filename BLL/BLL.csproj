@@ -93,6 +93,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BusinessModels\UserEdition.cs" />
+    <Compile Include="Interfaces\IAdminService.cs" />
+    <Compile Include="Interfaces\IPeriodicalRoleProvider.cs" />
     <Compile Include="Providers\PeriodicalMembershipProvider.cs" />
     <Compile Include="DTO\ArticleDTO.cs" />
     <Compile Include="DTO\CategoryDTO.cs" />
@@ -106,7 +109,9 @@
     <Compile Include="Interfaces\IPeriodicalMembershipProvider.cs" />
     <Compile Include="Interfaces\IProfileService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Providers\PeriodicalRoleProvider.cs" />
     <Compile Include="Services\AccountService.cs" />
+    <Compile Include="Services\AdminService.cs" />
     <Compile Include="Services\ArticlesService.cs" />
     <Compile Include="Services\EditionsService.cs" />
     <Compile Include="Services\ProfileService.cs" />

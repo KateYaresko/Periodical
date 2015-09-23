@@ -21,7 +21,10 @@
                     @if (User.Identity.IsAuthenticated)
                     {
                         <li class="@ViewBag.NavbarProfile">@Html.ActionLink("Profile", "Index", new { area = "User", controller = "Profile" })</li>
-                        <li class="@ViewBag.NavbarManagement">@Html.ActionLink("Management", "Index", new { area = "Admin", controller = "Management" })</li>
+                        if(User.IsInRole("Admin")||User.IsInRole("Editor"))
+                        {
+                            <li class="@ViewBag.NavbarManagement">@Html.ActionLink("Management", "Index", new { area = "Admin", controller = "Management" })</li>
+                        }
                     }
                 </ul>
                 <ul class="nav navbar-nav navbar-right">

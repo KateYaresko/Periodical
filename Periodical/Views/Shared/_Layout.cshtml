@@ -3,11 +3,12 @@
 <head>
     <meta charset="utf-8" />
     <title>@ViewBag.Title</title>
-    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    @*<link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />*@
     <meta name="viewport" content="width=device-width" />
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/bootstrapcss")   
-    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/modernizr")    
+    @Styles.Render("~/bundles/editablecss")
     @Styles.Render("~/bundles/datatablescss")
 </head>
 <body>
@@ -21,9 +22,12 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrapjs")
     @Scripts.Render("~/bundles/datatablesjs")
-    @Scripts.Render("~/Scripts/footer.js")
-    @Scripts.Render("~/Scripts/table.js")
+    @Scripts.Render("~/bundles/editablejs")
+
+    @Scripts.Render("~/Scripts/footer.js")   
     @Scripts.Render("~/Scripts/editions.js")
+    @Scripts.Render("~/Scripts/editable.js")
+    @Scripts.Render("~/Scripts/table.js")
     @RenderSection("scripts", required: false)
 </body>
 </html>
