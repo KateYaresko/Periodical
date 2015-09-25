@@ -1,27 +1,9 @@
 ﻿$(document).ready(function () {
-    $.fn.editable.defaults.mode = 'inline';
-
-    $('#firstname-change').editable();
-    $('#lastname-change').editable();
-    $('#email-change').editable();
-
-    $('.editable-input>input').required = true;
-
-    //$("#firstname-change").click(function () {
-       // $('.editable-input>[input]').prop('required', true);
-    //});
-
-    var password = document.getElementById("password");
-    var confirm_password = document.getElementById("confirm_password");
-
-    function validatePassword() {
-        if (password.value != confirm_password.value) {
-            confirm_password.setCustomValidity("Passwords Don't Match");
-        } else {
-            confirm_password.setCustomValidity('');
-        }
+    function editCategory(categoryName, categoryIconName, categoryBackgroundImgName, categoryHomeImgName)
+    {
+        $("#edit-category-name").val(categoryName);
+        $("#edit-category-icon").val(categoryIconName);
+        $("#edit-category-background").val(categoryBackgroundImgName);
+        $("#edit-category-home").val(categoryHomeImgName);
     }
-
-    password.onchange = validatePassword;
-    confirm_password.onkeyup = validatePassword;
 });

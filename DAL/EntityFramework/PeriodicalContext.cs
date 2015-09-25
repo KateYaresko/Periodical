@@ -10,17 +10,28 @@ namespace DAL.EntityFramework
 {
     public class PeriodicalContext : Context
     {
+        public PeriodicalContext()
+        {
+            Database.SetInitializer<PeriodicalContext>(new PeriodicalDbInitializer());
+        }
+        public PeriodicalContext(string connectionString)
+            : base(connectionString) { }
+
         public DbSet<User> Users { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Edition> Editions { get; set; }
         public DbSet<Article> Articles { get; set; }
         public DbSet<Role> Roles { get; set; }
 
-        public PeriodicalContext()
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            Database.SetInitializer<PeriodicalContext>(new PeriodicalDbInitializer());
+            modelBuilder.Entity<Category>().HasMany(i => i.Editions)
+                .WithOptional(a => a.Category)
+                .WillCascadeOnDelete(true);
+
+            modelBuilder.Entity<Edition>().HasMany(i => i.Articles)
+                .WithOptional(a => a.Edition)
+                .WillCascadeOnDelete(true);
         }
-        public PeriodicalContext(string connectionString)
-            : base(connectionString) {}
     }
 }

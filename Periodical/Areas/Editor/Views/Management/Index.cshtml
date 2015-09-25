@@ -1,0 +1,453 @@
+﻿@using Periodical.Areas.Editor.Models;
+@model Tuple<List<CategoryEditViewModel>, List<EditionEditViewModel>, List<ArticleEditViewModel>>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script>
+    function editCategory(categoryId, categoryName, categoryIconName, categoryBackgroundImgName, categoryHomeImgName) {
+        $("#edit-category-id").val(categoryId);
+        $("#edit-category-name").val(categoryName);
+        $("#edit-category-icon").val(categoryIconName);
+        $("#edit-category-background").val(categoryBackgroundImgName);
+        $("#edit-category-home").val(categoryHomeImgName);
+    }
+    function deleteCategory(categoryId) {
+        $("#delete-category-id").val(categoryId);
+    }
+
+    function editEdition(editionId, categoryName, name, price) {
+        $("#edit-edition-id").val(editionId);
+        $("#edit-edition-catname").val(categoryName);
+        $("#edit-edition-name").val(name);
+    }
+    function deleteEdition(editionId) {
+        $("#delete-edition-id").val(editionId);
+    }
+
+    function editArticle(articleId, editionName, articleTitle, articleImgName) {
+        $("#edit-article-id").val(articleId);
+        $("#edit-article-edname").val(editionName);
+        $("#edit-article-title").val(articleTitle);
+        $("#edit-article-imgname").val(articleImgName);
+    }
+    function deleteArticle(articleId) {
+        $("#delete-article-id").val(articleId);
+    }
+</script>
+
+<div class="jumbotron-indent"></div>
+<div class="profile col-md-offset-1 col-md-10">
+    <ul class="nav nav-tabs">
+        <li class="active">
+            <a href="#1tab" data-toggle="tab">Categories</a>
+        </li>
+        <li>
+            <a href="#2tab" data-toggle="tab">Editions</a>
+        </li>
+        <li>
+            <a href="#3tab" data-toggle="tab">Articles</a>
+        </li>
+    </ul>
+    <div class="tab-content clearfix">
+        <div class="tab-pane active profile-subscribes" id="1tab">
+            <div class="row float-right btn-create-editor">
+                <a href="#create-category-modal" data-toggle="modal" class="btn btn-info">
+                    <i class="glyphicon glyphicon-plus"></i> Create Category
+                </a>
+            </div>
+            <table id="categories-management-table" class="table table-projects row-border display table-striped">
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>Category</th>
+                        <th>Actions</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    @foreach (var category in Model.Item1)
+                    {
+                        <tr>
+                            <td>@category.Name</td>
+                            <td>
+                                <a href="#edit-category-modal" data-toggle="modal" class="btn btn-warning" onclick="editCategory('@category.CategoryId','@category.Name', '@category.IconName', '@category.BackgroundImgName', '@category.HomeImgName')">
+                                    <i class="glyphicon glyphicon-pencil"></i>
+                                </a>
+                                <a href="#delete-category-modal" data-toggle="modal" class="btn btn-danger" onclick="deleteCategory('@category.CategoryId')">
+                                    <i class="glyphicon glyphicon-remove"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="tab-pane profile-subscribes" id="2tab">
+            <div class="row float-right btn-create-editor">
+                <a href="#create-edition-modal" data-toggle="modal" class="btn btn-info">
+                    <i class="glyphicon glyphicon-plus"></i> Create Edition
+                </a>
+            </div>
+            <table id="editions-management-table" class="table row-border table-striped">
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Edition</th>
+                        <th>Price</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>Category</th>
+                        <th>Edition</th>
+                        <th>Price</th>
+                        <th>Actions</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    @foreach (var edition in Model.Item2)
+                    {
+                        <tr>
+                            <td>@edition.CategoryName</td>
+                            <td>@edition.Name</td>
+                            <td>@edition.Price</td>
+                            <td>
+                                <a href="#edit-edition-modal" data-toggle="modal" class="btn btn-warning" onclick="editEdition('@edition.EditionId', '@edition.CategoryName', '@edition.Name', '@edition.Price')">
+                                    <i class="glyphicon glyphicon-pencil"></i>
+                                </a>
+                                <a href="#delete-edition-modal" data-toggle="modal" class="btn btn-danger" onclick="deleteEdition('@edition.EditionId')">
+                                    <i class="glyphicon glyphicon-remove"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="tab-pane profile-subscribes" id="3tab">
+            <div class="row float-right btn-create-editor">
+                <a href="#create-article-modal" data-toggle="modal" class="btn btn-info">
+                    <i class="glyphicon glyphicon-plus"></i> Create Article
+                </a>
+            </div>
+            <table id="articles-management-table" class="table row-border table-striped">
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Edition</th>
+                        <th>Article</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>Category</th>
+                        <th>Edition</th>
+                        <th>Article</th>
+                        <th>Actions</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    @foreach (var article in Model.Item3)
+                    {
+                        <tr>
+                            <td>@article.CategoryName</td>
+                            <td>@article.EditionName</td>
+                            <td>@article.Title</td>
+                            <td>
+                                <a href="#edit-article-modal" data-toggle="modal" class="btn btn-warning" onclick='editArticle("@article.ArticleId", "@article.EditionName", "@article.Title", "@article.ImgName")'>
+                                    <i class="glyphicon glyphicon-pencil"></i>
+                                </a>
+                                <a href="#delete-article-modal" data-toggle="modal" class="btn btn-danger" onclick="deleteArticle('@article.ArticleId')">
+                                    <i class="glyphicon glyphicon-remove"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="jumbotron-indent"></div>
+
+<div id="create-category-modal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title text-center">Create Category</h4>
+            </div>
+            <form action="/Editor/Management/CreateCategory" method="post" id="add-cash-form">
+                <div class="modal-body">
+                    <div class="input-group change-psw-input">
+                        <a class="input-group-addon"><span class="input-group glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
+                        <input name='Name' type='text' placeholder="Category name" class="add-cash-input" required /><br />
+                    </div>
+                    <div class="input-group change-psw-input">
+                        <a class="input-group-addon"><span class="input-group glyphicon glyphicon-picture" aria-hidden="true"></span></a>
+                        <input name='Name' type='text' placeholder="Icon image name" class="add-cash-input" /><br />
+                    </div>
+                    <div class="input-group change-psw-input">
+                        <a class="input-group-addon"><span class="input-group glyphicon glyphicon-picture" aria-hidden="true"></span></a>
+                        <input name='Name' type='text' placeholder="Background image name" class="add-cash-input" /><br />
+                    </div>
+                    <div class="input-group change-psw-input">
+                        <a class="input-group-addon"><span class="input-group glyphicon glyphicon-picture" aria-hidden="true"></span></a>
+                        <input name='Name' type='text' placeholder="Home image name" class="add-cash-input" /><br />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary popup-btn" name="add-cash-form">Add</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div id="edit-category-modal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title text-center">Edit Category</h4>
+            </div>
+            <form action="/Editor/Management/EditCategory" method="post" id="add-cash-form">
+                <div class="modal-body">
+                    <input type="hidden" name="CategoryId" id="edit-category-id">
+                    <div class="input-group change-psw-input">
+                        <a class="input-group-addon"><span class="input-group glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
+                        <input name='Name' type='text' placeholder="Category name" class="add-cash-input" id="edit-category-name" required /><br />
+                    </div>
+                    <div class="input-group change-psw-input">
+                        <a class="input-group-addon"><span class="input-group glyphicon glyphicon-picture" aria-hidden="true"></span></a>
+                        <input name='IconName' type='text' placeholder="Icon image name" class="add-cash-input" id="edit-category-icon" /><br />
+                    </div>
+                    <div class="input-group change-psw-input">
+                        <a class="input-group-addon"><span class="input-group glyphicon glyphicon-picture" aria-hidden="true"></span></a>
+                        <input name='BackgroundImgName' type='text' placeholder="Background image name" class="add-cash-input" id="edit-category-background" /><br />
+                    </div>
+                    <div class="input-group change-psw-input">
+                        <a class="input-group-addon"><span class="input-group glyphicon glyphicon-picture" aria-hidden="true"></span></a>
+                        <input name='HomeImgName' type='text' placeholder="Home image name" class="add-cash-input" id="edit-category-home" /><br />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary popup-btn" name="add-cash-form">Add</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div id="delete-category-modal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title text-center">Delete Category</h4>
+            </div>
+            <form action="/Editor/Management/DeleteCategory" method="post">
+                <div class="modal-body">
+                    <input type="hidden" name="CategoryId" id="delete-category-id">
+                    <p>Are you sure you want to delete category? You won`t be able to restore it in the future!</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-default popup-btn" name="userId">Yes</button>
+                    <button class="btn btn-danger popup-btn" data-dismiss="modal">No</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@*-------------------------------------edition-------------------------------------------------------------------*@
+
+<div id="create-edition-modal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title text-center">Create Edition</h4>
+            </div>
+            <form action="/Editor/Management/CreateEdition" method="post" id="add-cash-form">
+                <div class="modal-body">
+                    <select name="CategoryName" class="add-select">
+                        @foreach (var category in Model.Item1)
+                        {
+                            <option value="@category.Name">@category.Name</option>
+                        }
+                    </select>
+                    <div class="input-group change-psw-input">
+                        <a class="input-group-addon"><span class="input-group glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
+                        <input name='Name' type='text' placeholder="Edition name" class="add-cash-input" required /><br />
+                    </div>
+                    <div class="input-group change-psw-input">
+                        <a class="input-group-addon"><span class="input-group glyphicon glyphicon-usd" aria-hidden="true"></span></a>
+                        <input name='Price' type='number' value='20' min="1" placeholder="Price" class="add-cash-input" required /><br />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary popup-btn" name="add-cash-form">Add</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div id="edit-edition-modal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title text-center">Edit Edition</h4>
+            </div>
+            <form action="/Editor/Management/EditEdition" method="post" id="add-cash-form">
+                <div class="modal-body">
+                    <input type="hidden" name="EditionId" id="edit-edition-id">
+                    <select name="CategoryName" class="add-select" id="edit-edition-catname">
+                        @foreach (var category in Model.Item1)
+                        {
+                            <option value="@category.Name">@category.Name</option>
+                        }
+                    </select>
+                    <div class="input-group change-psw-input">
+                        <a class="input-group-addon"><span class="input-group glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
+                        <input name='Name' type='text' placeholder="Edition name" class="add-cash-input" id="edit-edition-name" required /><br />
+                    </div>
+                    <div class="input-group change-psw-input">
+                        <a class="input-group-addon"><span class="input-group glyphicon glyphicon-usd" aria-hidden="true"></span></a>
+                        <input name='Price' type='number' min="1" placeholder="Price" value="25" step="0.01" class="add-cash-input" id="edit-edition-price" required /><br />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary popup-btn" name="add-cash-form">Add</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div id="delete-edition-modal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title text-center">Delete Edition</h4>
+            </div>
+            <form action="/Editor/Management/DeleteEdition" method="post">
+                <div class="modal-body">
+                    <input type="hidden" name="EditionId" id="delete-edition-id">
+                    <p>Are you sure you want to delete edition? You won`t be able to restore it in the future!</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-default popup-btn" name="userId">Yes</button>
+                    <button class="btn btn-danger popup-btn" data-dismiss="modal">No</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@*-------------------------------------article-------------------------------------------------------------------*@
+
+<div id="create-article-modal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title text-center">Edit Article</h4>
+            </div>
+            <form action="/Editor/Management/CreateArticle" method="post">
+                <div class="modal-body">
+                    <select name="EditionName" class="add-select">
+                        @foreach (var edition in Model.Item2)
+                        {
+                            <option value="@edition.Name">@edition.Name</option>
+                        }
+                    </select>
+                    <div class="input-group change-psw-input">
+                        <a class="input-group-addon"><span class="input-group glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
+                        <input name='Title' type='text' placeholder="Article title" class="add-cash-input" required /><br />
+                    </div>
+                    <div class="change-psw-input">
+                        <textarea name='Text' placeholder="Article content" class="add-cash-input" required ></textarea>
+                    </div>
+                    <div class="input-group change-psw-input">
+                        <a class="input-group-addon"><span class="input-group glyphicon glyphicon-picture" aria-hidden="true"></span></a>
+                        <input name='ImgName' type='text' placeholder="Image name" class="add-cash-input" /><br />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary popup-btn" name="add-cash-form">Add</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+    
+
+<div id="edit-article-modal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title text-center">Edit Article</h4>
+            </div>
+            <form action="/Editor/Management/EditArticle" method="post" id="add-cash-form">
+                <div class="modal-body">
+                    <input type="hidden" name="ArticleId" id="edit-article-id">
+                    <select name="EditionName" class="add-select" id="edit-article-edname">
+                        @foreach (var edition in Model.Item2)
+                        {
+                            <option value="@edition.Name">@edition.Name</option>
+                        }
+                    </select>
+                    <div class="input-group change-psw-input">
+                        <a class="input-group-addon"><span class="input-group glyphicon glyphicon-pencil" aria-hidden="true"></span></a>
+                        <input name='Title' type='text' placeholder="Article title" class="add-cash-input" id="edit-article-title" required /><br />
+                    </div>
+                    <div class="change-psw-input">
+                        <textarea name='Text' placeholder="Article content" class="add-cash-input" id="edit-article-text" required></textarea>
+                    </div>
+                    <div class="input-group change-psw-input">
+                        <a class="input-group-addon"><span class="input-group glyphicon glyphicon-picture" aria-hidden="true"></span></a>
+                        <input name='ImgName' type='text' placeholder="Image name" class="add-cash-input" id="edit-article-imgname" /><br />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary popup-btn" name="add-cash-form">Add</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div id="delete-article-modal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title text-center">Delete Article</h4>
+            </div>
+            <form action="/Editor/Management/DeleteArticle" method="post">
+                <div class="modal-body">
+                    <input type="hidden" name="ArticleId" id="delete-article-id">
+                    <p>Are you sure you want to delete article? You won`t be able to restore it in the future!</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-default popup-btn" name="userId">Yes</button>
+                    <button class="btn btn-danger popup-btn" data-dismiss="modal">No</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

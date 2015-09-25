@@ -13,6 +13,22 @@
     {
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true)
+        if (ViewBag.LoginIsFailed)
+        {
+            <div class="alert alert-danger flash error" role="alert">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                <span class="sr-only">Error:</span>
+                Email or password is incorrect. Please, try again.
+            </div>
+        }        
+        if (ViewBag.UserIsBlocked)
+        {
+            <div class="alert alert-danger flash error" role="alert">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                <span class="sr-only">Error:</span>
+                You were banned by admin. For further information contact admin@periodical.com.
+            </div>
+        }
         <div class="input-group">
             <a class="input-group-addon"><span class="input-group glyphicon glyphicon-envelope"></span></a>
             @Html.TextBoxFor(m => m.Email, new { @placeholder = "example@email.com", autofocus = "", @class = "authorization-textbox" })

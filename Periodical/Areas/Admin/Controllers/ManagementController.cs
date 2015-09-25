@@ -10,7 +10,7 @@ using System.Web.Mvc;
 
 namespace Periodical.Areas.Admin.Controllers
 {
-    [Authorize(Roles="Admin,Editor")]
+    [Authorize(Roles="Admin")]
     public class ManagementController : BaseManagementController
     {
         public ManagementController(IAdminService adminService)
@@ -22,8 +22,14 @@ namespace Periodical.Areas.Admin.Controllers
             Mapper.CreateMap<UserDTO, UserViewModel>();
             List<UserViewModel> users = Mapper.Map<List<UserDTO>, List<UserViewModel>>(adminService.GetUsers());
             var models = new Tuple<List<UserViewModel>>(users);
-            ViewBag.NavbarManagement = "active";
+            ViewBag.NavbarUsersManagement = "active";
             return View(models);
+        }
+
+        [HttpPost]
+        public ActionResult Block(UserViewModel models)
+        {
+            return RedirectToAction("Index");
         }
 
     }

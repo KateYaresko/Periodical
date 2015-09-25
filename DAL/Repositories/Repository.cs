@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
 using DAL.Interfaces;
+using System.Data.Entity.Core;
 
 namespace DAL.Repositories
 {
@@ -44,11 +45,11 @@ namespace DAL.Repositories
         }
         public virtual void Update(TEntity entity)
         {
-            Context.Entry(entity).State = EntityState.Modified;
+            Context.Entry(entity).State = EntityState.Modified;           
             Save();
         }
 
-        private void Save()
+        protected void Save()
         {
             Context.SaveChanges();
         }
@@ -56,6 +57,11 @@ namespace DAL.Repositories
         public virtual int Count()
         {
             return Context.Set<TEntity>().Count();
+        }
+
+        public virtual void UpdateUser(int objId, int refId)
+        {
+
         }
     }
 }

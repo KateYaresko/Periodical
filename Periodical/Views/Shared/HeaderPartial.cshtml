@@ -21,9 +21,13 @@
                     @if (User.Identity.IsAuthenticated)
                     {
                         <li class="@ViewBag.NavbarProfile">@Html.ActionLink("Profile", "Index", new { area = "User", controller = "Profile" })</li>
-                        if(User.IsInRole("Admin")||User.IsInRole("Editor"))
+                        if(User.IsInRole("Admin"))
                         {
-                            <li class="@ViewBag.NavbarManagement">@Html.ActionLink("Management", "Index", new { area = "Admin", controller = "Management" })</li>
+                            <li class="@ViewBag.NavbarUsersManagement">@Html.ActionLink("Users Management", "Index", new { area = "Admin", controller = "Management" })</li>
+                        }
+                        if(User.IsInRole("Admin") || User.IsInRole("Editor"))
+                        {
+                            <li class="@ViewBag.NavbarEditionsManagement">@Html.ActionLink("Editions Management", "Index", new { area = "Editor", controller = "Management" })</li>
                         }
                     }
                 </ul>

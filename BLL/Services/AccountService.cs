@@ -30,6 +30,11 @@ namespace BLL.Services
             return Mapper.Map<IEnumerable<User>, List<UserDTO>>(Db.Users.GetBy(user => user.Email == email));
         }
 
+        public bool UserIsBlock(string email)
+        {
+            return Db.Users.GetBy(user => user.Email == email).FirstOrDefault().IsBlocked;
+        }
+
         public void CreateUser(UserDTO user)
         {
             Mapper.CreateMap<UserDTO, User>();

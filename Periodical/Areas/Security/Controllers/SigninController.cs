@@ -19,6 +19,14 @@ namespace Periodical.Areas.Security.Controllers
         [AllowAnonymous]
         public ActionResult Index(string returnUrl)
         {
+            ViewBag.LoginIsFailed = false;
+            if (TempData["LoginIsFailed"] != null)
+                ViewBag.LoginIsFailed = TempData["LoginIsFailed"];
+
+            ViewBag.UserIsBlocked = false;
+            if (TempData["UserIsBlocked"] != null)
+                ViewBag.UserIsBlocked = TempData["UserIsBlocked"];
+
             ViewBag.ReturnUrl = returnUrl;
             ViewBag.NavbarSignin = "active";
             return View();
@@ -29,10 +37,17 @@ namespace Periodical.Areas.Security.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Index(SigninViewModel model, string returnUrl)
         {
+            TempData["LoginIsFailed"] = false;
+            TempData["UserIsBlocked"] = false;
             try
             {
                 if (membership.ValidateUser(model.Email, model.Password))
                 {
+                    if (accountService.UserIsBlock(model.Email))
+                    {
+                        TempData["UserIsBlocked"] = true;
+                        return RedirectToAction("Index");
+                    }
                     FormsAuthentication.SetAuthCookie(model.Email, model.RememberMe);
                     return RedirectToLocal(returnUrl);
                 }
@@ -40,6 +55,7 @@ namespace Periodical.Areas.Security.Controllers
             }
             catch(ValidationException exception)
             {
+                TempData["LoginIsFailed"] = true;
                 return RedirectToAction("Index");
             }
         }

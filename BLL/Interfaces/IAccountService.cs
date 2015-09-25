@@ -11,6 +11,7 @@ namespace BLL.Interfaces
     {
         List<UserDTO> GetUserByEmail(string email);
         void CreateUser(UserDTO user);
+        bool UserIsBlock(string email);
         void Dispose();
     }
 }

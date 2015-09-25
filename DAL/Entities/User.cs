@@ -16,6 +16,7 @@ namespace DAL.Entities
         public double? Cash { get; set; }
         public bool IsBlocked { get; set; }
         public virtual Role Role { get; set; }
+
         public virtual ICollection<Edition> Editions { get; set; }
         public User()
         {

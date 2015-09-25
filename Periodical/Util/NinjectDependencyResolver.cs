@@ -31,8 +31,8 @@ namespace Periodical.Util
             kernel.Bind<IAccountService>().To<AccountService>();
             kernel.Bind<IProfileService>().To<ProfileService>();
             kernel.Bind<IAdminService>().To<AdminService>();
+            kernel.Bind<IEditorService>().To<EditorService>();
             kernel.Bind<IPeriodicalMembershipProvider>().To<PeriodicalMembershipProvider>();
-            kernel.Bind<IPeriodicalRoleProvider>().To<PeriodicalRoleProvider>(); 
         }
     }
 }

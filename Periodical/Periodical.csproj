@@ -189,6 +189,12 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Admin\Controllers\BaseManagementController.cs" />
     <Compile Include="Areas\Admin\Models\UserViewModel.cs" />
+    <Compile Include="Areas\Editor\Controllers\BaseManagementController.cs" />
+    <Compile Include="Areas\Editor\Controllers\ManagementController.cs" />
+    <Compile Include="Areas\Editor\EditorAreaRegistration.cs" />
+    <Compile Include="Areas\Editor\Models\ArticleEditViewModel.cs" />
+    <Compile Include="Areas\Editor\Models\CategoryEditViewModel.cs" />
+    <Compile Include="Areas\Editor\Models\EditionEditViewModel.cs" />
     <Compile Include="Areas\Security\Models\SigninViewModel.cs" />
     <Compile Include="Areas\Security\Models\SignupViewModel.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
@@ -302,6 +308,8 @@
     <Content Include="Areas\Security\Views\Signin\Index.cshtml" />
     <Content Include="Areas\Security\Views\Signup\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Management\Index.cshtml" />
+    <Content Include="Areas\Editor\Views\Web.config" />
+    <Content Include="Areas\Editor\Views\Management\Index.cshtml" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-2.1.3.js" />
     <Content Include="Scripts\jquery-2.1.3.min.js" />
@@ -354,6 +362,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Views\Shared\" />
+    <Folder Include="Areas\Editor\Views\Shared\" />
     <Folder Include="Areas\Security\Views\Shared\" />
     <Folder Include="Areas\User\Views\Shared\" />
   </ItemGroup>

@@ -16,5 +16,7 @@ namespace DAL.Interfaces
         void Delete(TEntity entity);
         void Update(TEntity entity);
         int Count();
+
+        void UpdateUser(int objId, int refId);
     }
 }

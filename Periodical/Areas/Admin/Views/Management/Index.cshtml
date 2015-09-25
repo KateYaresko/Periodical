@@ -7,72 +7,56 @@
 }
 
 <div class="jumbotron-indent"></div>
-<div class="profile container">
+<div class="profile col-md-offset-1 col-md-10">
     <ul class="nav nav-tabs">
         <li class="active">
             <a href="#1tab" data-toggle="tab">Personal Data</a>
-        </li>
-        <li>
-            <a href="#2tab" data-toggle="tab">Subscribes</a>
         </li>
     </ul>
 
     <div class="tab-content clearfix">
         <div class="tab-pane active profile-subscribes" id="1tab">
-            <table id="users-table" class="table table-projects row-border display table-striped">
-                <thead>
-                    <tr>
-                        <th>Full Name</th>
-                        <th>Email</th>
-                        <th>Block</th>
-                    </tr>
-                </thead>
-                <tfoot>
-                    <tr>
-
-                        <th>Full Name</th>
-                        <th>Email</th>
-                        <th>Block</th>
-                    </tr>
-                </tfoot>
-                <tbody>
-                    @for (int i = 0; i < Model.Item1.Count(); i++)
-                    {
+            <form action="/Admin/Management/Block" method="post" id="add-cash-form">               
+                <table id="users-table" class="table table-projects row-border display table-striped">
+                    <thead>
                         <tr>
-                            <td>@Model.Item1[i].FirstName @Model.Item1[i].LastName</td>
-                            <td>@Model.Item1[i].Email</td>
-                            <td>
-                                @Html.CheckBoxFor(m => m.Item1[i].IsBlocked)
-                                Block
-                            </td>
+                            <th>Full Name</th>
+                            <th>Email</th>
+                            <th>Block</th>
+                            <th>Save</th>
                         </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-        <div class="tab-pane profile-subscribes" id="2tab">
-            <table id="editions-table" class="table table-projects row-border display table-striped">
-                <thead>
-                    <tr>
-                        <th>Category</th>
-                        <th>Edition</th>
-                    </tr>
-                </thead>
-                <tfoot>
-                    <tr>
-                        <th>Category</th>
-                        <th>Edition</th>
-                    </tr>
-                </tfoot>
-                <tbody>
+                    </thead>
+                    <tfoot>
+                        <tr>
 
-                    <tr>
-                        <td>element.Item1</td>
-                        <td>element.Item2</td>
-                    </tr>
-
-                </tbody>
-            </table>
+                            <th>Full Name</th>
+                            <th>Email</th>
+                            <th>Block</th>
+                            <th>Save</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @for (int i = 0; i < Model.Item1.Count(); i++)
+                        {
+                            <tr>
+                                <td>@Model.Item1[i].FirstName @Model.Item1[i].LastName</td>
+                                <td>@Model.Item1[i].Email</td>
+                                <td>
+                                    @Html.CheckBoxFor(m => m.Item1[i].IsBlocked)
+                                    Block
+                                </td>
+                                <td>
+                                    <div class="row btn-create-editor">
+                                        <button type="submit" class="btn btn-info">
+                                            <i class="glyphicon glyphicon-plus"></i> Save Changes
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </form>
         </div>
     </div>
 </div>

@@ -10,7 +10,7 @@
     }
 </style>*@
 
-<div class="categoty-img" @*style="background-image: url('Content/@ViewBag.ActiveBackground')"*@></div>
+<div class="categoty-img" style="background-image: url('Content/@ViewBag.ActiveBackground')"></div>
 <div class="editions">
     <div class="list-group col-md-2 col-sm-2">
         @foreach (var category in Model.Item1)
@@ -27,6 +27,14 @@
         }
     </div>
     <div class="col-md-10 col-sm-10">
+        @if(!ViewBag.IsSubscriptionSuccess)
+        {
+            <div class="alert alert-danger flash error" role="alert">
+                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                    <span class="sr-only">Error:</span>
+                    Sorry, your cash is not enough for subscription. Add money in your profile and try again.
+                </div>
+        }
         <table id="editions-table" class="table table-projects row-border display table-striped">
             <thead>
                 <tr>
@@ -48,13 +56,20 @@
                     <tr>
                         <td>@Html.ActionLink(edition.Name, "Articles", "Editions", new { editionId = edition.EditionId, isSubscribed = edition.IsSubscribed }, null)</td>
                         <td>@edition.Price $</td>
-                        @if (edition.IsSubscribed)
+                        @if (!ViewBag.isAvailable)
+                        {
+                            <td>Please, <a href="/Security/Signin">login</a> to subscride!</td>
+                        }
+                        else if (edition.IsSubscribed)
                         {
                             <td>You are already subscribed</td>
                         }
                         else
                         {
-                            <td><a href="#">Click here to subscribe!</a></td>
+                            using (Html.BeginForm("Subscription", "Editions", new { editionId = edition.EditionId }, FormMethod.Post))
+                            {
+                                <td><button type="submit" class="btn btn-primary popup-btn">Subscribe!</button></td>
+                            }
                         }
                     </tr>
                 }

@@ -88,6 +88,19 @@ h5, h6 {
         padding: 0;
         text-decoration: none;
     }
+/*
+    editor------------------------------------------------*/
+
+.btn-create-editor {
+    padding-right: 1%;
+    padding-bottom: 2%;
+}
+
+.add-select {
+    width: 100%;
+    margin-bottom: 2%;
+}
+
 /*signin
     ------------------------------------------------------*/
 

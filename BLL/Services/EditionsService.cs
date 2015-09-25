@@ -2,6 +2,7 @@
 using BLL.DTO;
 using BLL.Interfaces;
 using DAL.Entities;
+using DAL.EntityFramework;
 using DAL.Interfaces;
 using DAL.Repositories;
 using System;
@@ -28,20 +29,48 @@ namespace BLL.Services
             return categories;
         }
 
-        public List<EditionDTO> GetEditionsByCategoryId(int categoryId, string email)
+        public List<EditionDTO> GetEditionsByCategoryId(int categoryId, string email, ref bool isAvailable)
         {
             var editionsEntity = Db.Editions.GetBy(edition => edition.Category.CategoryId == categoryId).ToList();
             Mapper.CreateMap<Edition, EditionDTO>();
             var editions = Mapper.Map<List<Edition>, List<EditionDTO>>(editionsEntity);
-            User user = Db.Users.GetBy(u => u.Email == email).FirstOrDefault();
-            for(int i = 0; i < editionsEntity.Count(); i++)
+
+            if(email != "" && email != null)
             {
-                if (user.Editions.Contains(editionsEntity[i]))
+                User user = Db.Users.GetBy(u => u.Email == email).FirstOrDefault();
+                for (int i = 0; i < editionsEntity.Count(); i++)
                 {
-                    editions[i].IsSubscribed = true;
+                    foreach(var edition in user.Editions)
+                    {
+                        if (edition.Name == editionsEntity[i].Name)
+                        {
+                            editions[i].IsSubscribed = true;
+                        }
+                    }
                 }
+                isAvailable = true;
             }
+                    
             return editions;
+        }
+
+        public bool SibscribeUser(int editionId, string email, ref int categoryId)
+        {
+            using(var db = new PeriodicalContext())
+            {               
+                var user = db.Users.Where(u => u.Email == email).FirstOrDefault();
+                var edition = db.Editions.Find(editionId);
+                categoryId = edition.Category.CategoryId;
+                if (user.Cash >= edition.Price)
+                {
+                    user.Editions.Add(edition);
+                    edition.Users.Add(user);
+                    user.Cash -= edition.Price;
+                    db.SaveChanges();
+                    return true;
+                }
+                return false;
+            }
         }
 
         public string GetBackgroundById(int id)

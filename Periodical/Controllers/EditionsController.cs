@@ -22,14 +22,24 @@ namespace Periodical.Controllers
             Mapper.CreateMap<CategoryDTO, CategoryViewModel>();
             var categories = Mapper.Map<IEnumerable<CategoryDTO>, List<CategoryViewModel>>(editionsService.GetCategories());
 
+            bool isAvailable = false;
             Mapper.CreateMap<EditionDTO, EditionViewModel>();
-            var editions = Mapper.Map<IEnumerable<EditionDTO>, List<EditionViewModel>>(editionsService.GetEditionsByCategoryId(categoryId, User.Identity.Name));
+            var editions = Mapper.Map<IEnumerable<EditionDTO>, List<EditionViewModel>>(editionsService.GetEditionsByCategoryId(categoryId, User.Identity.Name, ref isAvailable));
 
             var models = new Tuple<List<CategoryViewModel>, List<EditionViewModel>>(categories, editions);
 
             ViewBag.ActiveCategory = categoryId;
             ViewBag.ActiveBackground = editionsService.GetBackgroundById(categoryId);
             ViewBag.NavbarEditions = "active";
+            ViewBag.isAvailable = false;
+            if(isAvailable)
+                ViewBag.isAvailable = true;
+
+            ViewBag.IsSubscriptionSuccess = true;
+            if (TempData["IsSubscriptionSuccess"] != null)
+            {
+                ViewBag.IsSubscriptionSuccess = TempData["IsSubscriptionSuccess"];
+            }
 
             return View(models);
         }
@@ -48,10 +58,18 @@ namespace Periodical.Controllers
             return View(models);
         }
 
-        //protected override void Dispose(bool disposing)
-        //{
-        //    editionsService.Dispose();
-        //    base.Dispose(disposing);
-        //}
+        [HttpPost]
+        public ActionResult Subscription(int editionId)
+        {
+            int categoryId = 1;
+            TempData["IsSubscriptionSuccess"] = editionsService.SibscribeUser(editionId, User.Identity.Name, ref categoryId);
+            return RedirectToAction("Index", new { categoryId = categoryId });
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            editionsService.Dispose();
+            base.Dispose(disposing);
+        }
     }
 }
