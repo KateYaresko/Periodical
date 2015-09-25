@@ -41,11 +41,11 @@ namespace BLL.Services
 
         public IEnumerable<ArticleDTO> GetArticles(int editionId, bool isSubscribed)
         {
-            //if (isSubscribed)
+            if (isSubscribed)
             {
                 return GetAllArticles(editionId);
             }
-            //return GetLimitedArticles(editionId);
+            return GetLimitedArticles(editionId);
         }
 
         public EditionDTO GetEditionById(int editionId)
